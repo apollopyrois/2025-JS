@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Demonstration</title>
+    <style>
+        h1 {
+            width: 700px;
+            border: thick double black;
+            margin: 0 auto;
+            text-align: center;
+            padding: .5em;
+        }
+
+        #main {
+            display: block;
+            margin: 0 auto;
+            width: 700px;
+        }
+
+        .dtable { display: table; }
+        .drow { display: table-row; }
+        .dcell { display: table-cell; padding: 10px;}
+
+        img { width: 200px; height: 200px;}
+
+        .dcell > * {vertical-align: middle;}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        /*
+        alert ("hello from javascript");
+        console.log("logged message from line 34");
+
+        javascript commands/directives execute as soon as they
+        are loaded in the browser. To delay, the method we will
+        be using in this course is jQuery's ready function.
+
+        $ => call to the jquery library
+        $(document) => document is the element we are interacting with
+        $(document).ready(); => code inside ready() runs when loads
+        $(document).ready( function() { }); <= code inside { } aka callback
+
+        */
+        $(document).ready(function(){
+            //log a message to the console
+            console.log("the page has loaded");
+
+            $("img").css("opacity", 0.5);
+            // $("img:even").css("opacity", 0.5);
+
+            var mainWidth = $("#main").css("width");
+            console.log("#main width is: " + mainWidth);
+
+            //set a new width for main
+            var newWidth = parseInt(mainWidth) * 2;
+            $("#main").css("width", newWidth + "px");
+
+            $("img").mouseover(function(e){
+                $(this).css("opacity", 1.0);
+            });
+
+            $("img").mouseout(function(e){
+                $(this).css("opacity", 0.5);
+            });
+
+            $("input").blur(function(e){
+                var inputValue = $(this).val();
+                alert("You entered: "+ inputValue );
+            });
+
+        });
+        
+    </script>
+</head>
+<body>
+    <noscript>
+        javascript is required
+    </noscript>
+
+    <h1>SWC Flower Store</h1>
+    <form method="post" action ="">
+        <div id="main">
+            <img src="images/basket.jpg" alt="basket">
+            <div class="dtable">
+                <div class="drow">
+                    <div class="dcell">
+                        <img src="./images/flower1.jpg" alt="1">
+                        <label for="flower1">Flower 1</label>
+                        <input type="text" id="flower1" name="flower1" value="0" required> 
+                    </div><!-- .dcell -->
+                    <div class="dcell">
+                        <img src="./images/flower2.jpg" alt="2">
+                        <label for="flower2">Flower 2</label>
+                        <input type="text" id="flower2" name="flower2" value="0" required> 
+                    </div><!-- .dcell -->
+                    <div class="dcell">
+                        <img src="./images/flower3.jpg" alt="3">
+                        <label for="flower3">Flower 3</label>
+                        <input type="text" id="flower3" name="flower3" value="0" required> 
+                    </div><!-- .dcell -->
+                </div><!-- .drow -->
+                <div class="drow">
+                    <div class="dcell">
+                        <img src="./images/flower4.jpg" alt="4">
+                        <label for="flower4">Flower 4</label>
+                        <input type="text" id="flower4" name="flower4" value="0" required> 
+                    </div><!-- .dcell -->
+                    <div class="dcell">
+                        <img src="./images/flower5.jpg" alt="5">
+                        <label for="flower5">Flower 5</label>
+                        <input type="text" id="flower5" name="flower5" value="0" required> 
+                    </div><!-- .dcell -->
+                    <div class="dcell">
+                        <img src="./images/flower6.jpg" alt="6">
+                        <label for="flower6">Flower 6</label>
+                        <input type="text" id="flower6" name="flower6" value="0" required> 
+                    </div><!-- .dcell -->
+                </div><!-- .drow -->
+            </div><!-- .dtable -->
+        </div><!-- #main -->
+    </form>
+
+</body>
+</html>
