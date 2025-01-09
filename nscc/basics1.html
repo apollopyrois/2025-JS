@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basics1</title>
+    <script type="text/javascript">
+        //write a function to compare 2 numbers and display the maximum
+        function compareTwoNumbers(num1, num2) {
+            var max = getMaximumValues(num1, num2);
+            console.log("maximum number is: " + max);
+        }
+
+
+        //write a function to print the maximum of 2 numbers
+        function printMaximumValue(x,y) {
+            if (x > y) {
+                console.log("maximum number is: " + x);
+            } else {
+                console.log("maximum number is: " + y);
+            }
+        }
+
+        //write a function to return the maximum of 2 numbers
+        function getMaximumValues(num1, num2) {
+            if(num1 > num2) {
+                return num1;
+            } else {
+                return num2;
+            }
+            //return (num1 > num2) ? n1 : n2;
+        }
+    </script>
+</head>
+<body>
+    <a href="" onclick="javascript:compareTwoNumbers(5,10); return false;">Log Max</a>
+    <br>
+    <a href="" onclick="printMaximumValue(33, 22);return false;">Print Max</a>
+    <br>
+    <a href="" onclick="printMaximumValue('darren', 'andrews');return false;">Print Max Name</a>
+</body>
+</html>
