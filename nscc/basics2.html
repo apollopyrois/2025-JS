@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        // alert("Hello");
+        // alert("World"); //these 2 lines run immediately after jquery line is loaded
+
+        function sayHello() {
+            alert("hello 2 u");
+        }
+
+        function sayHello2(person) {
+            // alert("hello 2 " + person);
+            alert(`hello 2 ${person}!`);
+        }
+
+        //instead of wrapping html code in a's to trigger JS,
+        //we can use click events
+        //1. use $ to invoke jQuery
+        //2. in parentheses, use a selector to identify element(s)
+        //3. add the action (with callback function)
+        //4. add code to be executed within the callback
+
+        $(document).ready(function() {
+            /*
+            $("#myP").click(function(e){
+                sayHello();
+            }).mouseover(function(e){
+                $(this).css('color', 'blue');
+            }).mouseout(function(e){
+                $(this).css('color', 'black');
+            });
+            */
+
+            $("#myP").on({
+                click: function(e) {
+                    sayHello();
+                },
+
+                mouseover: function(e) {
+                    $(this).css('color', 'blue');
+                },
+
+                mouseout: function(e) {
+                    $(this).css('color', 'black');
+                }
+            });
+
+        });
+
+        //delay this untril the whole html document is loaded in browser
+        // $(document).ready();
+    </script>
+</head>
+<body>
+    <a href="" onclick="javascript:sayHello(); return false;">My Content</a>
+    <br>
+    Say Hello
+    <br>
+    <a href="" onclick="sayHello2('Jeff')">Say Hello Again</a>
+    <br>
+    <p id="myP"><b>Say Goodbye</b></p>
+</body>
+</html>

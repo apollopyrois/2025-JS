@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .errors {
+            color: red;
+            font-weight: 700;
+            display: none; /* display: inline-block; */
+        }
+        .errorDiv, .successDiv {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            font-weight: 700;
+        }
+        .errorDiv {
+            background-color: red;
+        }
+        .successDiv {
+            background-color: green;
+        }
+        #check-warning {
+            color: red;
+            font-weight: 700;
+        }
+        #submit {
+            display: none;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function checkFormData() {
+            //alert("form submit clicked");
+            //$(".errors").css("display", 'inline-block');
+
+            //get the data from the form below
+            const field1 = $("#field1").val();
+            const field2 = $("#field2").val();
+            const field3 = $("#field3").val();
+            const field4 = $("#field4").val();
+            //const field5 = $("#field5").val(); //value always 1 regardless of checked
+            const field5 = $("#field5").is(':checked'); //check the state of check
+            const field6 = $("#field6").val();
+            const terms = $("#terms").is(':checked'); //check the state of terms check
+
+            //log the values to console
+            console.log("field1: " + field1);
+            console.log(`field2: ${field2}`);
+            console.log(`field3: ${field3}`);
+            console.log(`field4: ${field4}`);
+            console.log(`field5: ${field5}`);
+            console.log(`field6: ${field6}`);
+
+            if ( !terms ) return;
+
+            //check for errors
+
+            //set an error flag to 0 as code to indicate error free
+            let errors = 0;
+
+            //check each field to determine if filled in
+            if ( field1 == "" ) {
+                errors = 1;
+                $("#field1Error").css('display', 'inline-block');
+            } else {
+                $("#field1Error").css('display', 'none');
+            }
+
+            if ( field2.trim().length === 0 ) {
+                errors = 2;
+                $("#field2Error").css('display', 'inline-block');
+            } else {
+                $("#field2Error").css('display', 'none');
+            }
+
+            if ( field3.trim().length === 0 ) {
+                errors = 3;
+                $("#field3Error").css('display', 'inline-block');
+            } else {
+                $("#field3Error").css('display', 'none');
+            }
+
+            if ( field4.trim().length === 0 ) {
+                errors = 4;
+                $("#field4Error").css('display', 'inline-block');
+            } else {
+                $("#field4Error").css('display', 'none');
+            }
+
+            if ( !field5 ) {
+                errors = 5;
+                $("#field5Error").css('display', 'inline-block');
+            } else {
+                $("#field5Error").css('display', 'none');
+            }
+
+            if ( field6.trim().length === 0 ) {
+                errors = 6;
+                $("#field6Error").css('display', 'inline-block');
+            } else {
+                $("#field6Error").css('display', 'none');
+            }
+
+            //if no errors,
+            if ( errors == 0) {
+                //submit to web site
+                $("body > div.errorDiv").remove();
+                //alert('no errors');
+ 
+                //Method 1: AJAX  - Asynchronous Javascript
+                //Used here to send data to a server and process response
+
+                //Step 1: prepare a query string that has the data to send
+                const dataForServer = "field1=" + field1 + "&field2=" + field2 +
+                                      "&field3=" + field3 + "&field4=" + field4 +
+                                      "&field5=" + field5 + "&field6=" + field6;
+                //alert(dataForServer);
+                console.log("data to send: " + dataForServer);
+
+                //Step 2: send query string to web server
+                $.ajax({
+                    type: "post",
+                    url: './send.php',
+                    data: dataForServer,
+                    success: function(response) {
+                        //do when the server send a response back
+                        console.log(`response: ${response}`);
+
+                        if (response != "") {
+                            //clear the form values
+                            $(".errors").css('display', 'none');
+                            $("#field1").val('');
+                            $("#field2").val('');
+                            $("#field3").val('');
+                            $("#field4").val('');
+                            $("#field6").val('');
+                            $("#field5").prop('checked', false);
+                            $("#terms").prop('checked', false);
+                            $("#check-warning").css('display', 'block');
+                            $("#submit").css('display', 'none');
+
+                            //add a success message that automatically dismisses
+                            $("body").prepend("<div class='successDiv'>form submitted</div>");
+                            setTimeout(function(){
+                                $("body > div.successDiv").remove();
+                             }, 3000);
+                        }
+
+                    }
+                });
+                
+                //extra code here but beware that you will not wait for 
+                //ajax task to complete before running this code
+
+            } else {
+                //display error message
+                //alert('errors');
+                $("body > div.errorDiv").remove();
+                $("body").prepend("<div class='errorDiv'>you have errors</div>");
+                console.log(`The last error code is: ${errors}`);
+            }
+        }
+    
+        $(document).ready(function(){ 
+            $("#terms").click(function(e) {
+                //alert('terms clicked');
+                //const terms = $("#terms").is('checked');
+                if ( $(this).is(':checked') ) {
+                    $("#check-warning").css('display','none');
+                    $("#submit").css('display','block');
+                } else {
+                    $("#check-warning").css('display','block');
+                    $("#submit").css('display','none');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>Web Form Checking</div>
+    <form id="form1" action="javascript:checkFormData();" method="post">
+        <label for="field1">Field 1:</label>
+        <input type="text" name="field1" id="field1" placeholder="Enter value" alt="">
+        <span class="errors" id="field1Error">*required</span>
+        <br>
+
+        <label for="field2">Field 2:</label>
+        <input type="text" name="field2" id="field2" placeholder="Enter value" alt="">
+        <span class="errors" id="field2Error">*required</span>
+        <br>
+
+        <label for="field3">Field 3:</label>
+        <input type="text" name="field3" id="field3" placeholder="Enter value" alt="">
+        <span class="errors" id="field3Error">*required</span>
+        <br>
+
+        <label for="field4">Field 4:</label>
+        <select name="field4" id="field4">
+            <option value="">Please choose...</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+        <span class="errors" id="field4Error">*required</span>
+        <br>
+
+        <label for="field5">Field 5:</label>
+        <input type="checkbox" name="field5" id="field5" value="1">
+        <span class="errors" id="field5Error">*required</span>
+        <br>
+
+        <label for="field6">Field 6:</label>
+        <span class="errors" id="field6Error">*required</span>
+        <br>
+        <textarea name="field6" id="field6" rows="5" cols="45"></textarea>
+        <br>
+
+        <input type="checkbox" name="terms" id="terms" value="1"> 
+        You agree to the terms and conditions for the site (link)
+        <br>
+        <span id="check-warning">*Terms must be agreed to. Check checkbox</span>
+        <br>
+
+        <input type="submit" id="submit" value="Submit">
+    </form>
+</body>
+</html>
