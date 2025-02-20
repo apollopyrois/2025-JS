@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  	<head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="description" content="">
+    	<title>Top navbar example · Bootstrap v5.3</title>
+
+	  	<link href="./css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+    	<link href="styles.css" rel="stylesheet">
+  	</head>
+  	<body>
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Top navbar</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Link</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" aria-disabled="true">Disabled</a>
+						</li>
+					</ul>
+					<form class="d-flex" role="search">
+						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+
+        <div class="container-fluid banner-region">
+            This is a full-width container. Good for banners, slideshows
+        </div>
+        <br>
+        <div class="container-fluid banner-region">
+           <div class="row">
+                <div class="col-md-12">
+                    This is my content within a fluid-container with col-12
+                </div>
+           </div>
+        </div>
+
+        <div class="container banner-region2">
+            This is a regular container. Good for content
+        </div>
+
+        <main class="container clearfix">
+            <div class="row">
+                <div class="col-md-12">This is my full-width content</div>
+                <div class="col-md-6">50%</div>
+                <div class="col-md-6">50%</div>
+                <div class="col-md-3">25%</div>
+            </div>
+            <div class="row">
+                <div class="offset-md-3 col-md-6">50% centered</div>
+            </div>
+
+            <div class="row">
+                <div class="fb-300">Float 1</div>
+                <div class="fb-300">Float 2</div>
+                <div class="fb-300">Float 3</div>    
+            </div>
+
+            <div class="row">
+                <p class="display-1">This is my header</p>
+                <h1>Old H1</h1>    
+                <p class="display-6">This is my header 6</p>
+                <h6>Old H6</h6>    
+            </div>
+
+            <div class="row">
+                <abbr title="description of word">word</abbr>
+            </div>
+
+            <p class="fw-bold text-end bg-danger text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel ipsum eget tellus semper ultricies a id enim. Duis feugiat odio velit, non sodales mi dictum non. Aenean vulputate eleifend tellus, ut venenatis mi venenatis volutpat. In ullamcorper ante nec ligula dapibus, nec commodo ligula feugiat. Quisque gravida, risus ac malesuada fringilla, turpis ex luctus ipsum, ac viverra nunc arcu ac lacus. Maecenas fermentum erat eget augue condimentum, et ultricies nulla scelerisque. Curabitur in mattis ante. Duis eget cursus elit. Proin in nibh vitae tortor ultricies porta ut ut libero.</p>
+		</main>
+	
+	    <script src="./js/jquery.min.js"></script>
+		<script src="./js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>

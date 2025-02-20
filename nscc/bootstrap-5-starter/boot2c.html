@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  	<head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="description" content="">
+    	<title>Top navbar example · Bootstrap v5.3</title>
+
+	  	<link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/src/parsley.min.css">
+        <link href="styles.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+        <style>
+            .mt-20 { margin-top: 20px;}
+        </style>
+  	</head>
+  	<body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Top navbar</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Link</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" aria-disabled="true">Disabled</a>
+						</li>
+					</ul>
+					<form class="d-flex" role="search">
+						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+		<main class="container">
+            <form action="" method="post" id="form">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group mt-20">
+                            <label for="field1">Field 1</label>
+                            <input type="text" name="field1"
+                            id="field1" value=""
+                            placeholder="Please enter value"
+                            class="form-control"
+                            data-parsley-maxlength="5"
+                            data-parsley-required>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mt-20">
+                            <label for="field2">Field 2</label>
+                            <input type="text" name="field2"
+                            id="field2" value=""
+                            placeholder="Please enter value"
+                            class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group mt-20">
+                            <label for="field1">Field 3</label>
+                            <input type="text" name="field3"
+                            id="field3" value=""
+                            placeholder="Please enter value"
+                            class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-20">
+                    <div class="col-sm-12">
+                        <label for="field6">Please select Choice</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="field6" value="1"> 1
+                        </label>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="field6" value="2"> 2
+                        </label>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="field6" value="3"> 3
+                        </label>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="field6" value="4"> 4
+                        </label>
+                    </div>
+                </div>
+                <div class="row mt-20">
+                    <div class="col-md-12">
+                        <input type="checkbox" id="field7" name="field7" value="1">
+                        I agree to the terms and conditions
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mt-20">
+                        <label for="field8">Country</label>
+                        <select name="field8" id="field8" class="form-control">
+                            <option value="">Please Choose...</option>
+                            <option value="CA">Canada</option>
+                            <option value="US">United States<option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-20">
+                        <label for="field9">Province/State</label>
+                        <select name="field9" id="field9" class="form-control">
+                            <option value="">Please Choose...</option>
+                            <option value="NS">Nova Scotia</option>
+                            <option value="NB">New Brunswick<option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary btn-lg btn=block w-100">
+                            Submit
+                        </button>
+                    </div>
+                    <div class="offset-md-6 col-md-3">
+                        <button type="submit" class="btn btn-danger btn-lg btn=block w-100">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+		</main>
+	    <script src="./js/jquery.min.js"></script>
+		<script src="./js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/dist/parsley.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#form").parsley();
+            });
+        </script>
+
+	</body>
+</html>
