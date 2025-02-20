@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>JS Assignment#1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <style>
+        #myBlock {
+            display: none;
+        }
+        #myArrows {
+            position: absolute;
+            left: 600px;
+            top: 600px;
+            width: 300px;
+        }
+        #cannonball {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 300px;
+            top: 550px;
+        }
+        #ularrow, #uarrow, #urarrow, #larrow, #marrow, #rarrow, #dlarrow, #darrow, #drarrow {
+            float: left;
+            width: 100px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            alert("Thanks for visiting");
+
+            $("h1").after("<h2>Plan a Visit</h2>");
+        });
+
+        function showDiv() {
+            document.getElementById("myBlock").style.display = "block";
+        }
+
+        function hideDiv() {
+            document.getElementById("myBlock").style.display = "none";
+        }
+
+        let isRed = false;
+        function changeTextColor() {
+            if (isRed) {
+                $("p:nth-of-type(2n)").css("color", "black");
+            } else {
+                $("p:nth-of-type(2n)").css("color", "red");
+            }
+            isRed = !isRed;
+        }
+
+        function moveBall(direction) {
+            let ball = $("#cannonball");
+            let position = ball.position();
+            let move = 50;
+            let diagMove = 25;
+
+            switch (direction) {
+                case "up":
+                    ball.css("top", position.top - move);
+                    break;
+                case "down":
+                    ball.css("top", position.top + move);
+                    break;
+                case "left":
+                    ball.css("left", position.left - move);
+                    break;
+                case "right":
+                    ball.css("left", position.left + move);
+                    break;
+                case "upLeft":
+                    ball.css({ "top": position.top - diagMove, "left": position.left - diagMove });
+                    break;
+                case "upRight":
+                    ball.css({ "top": position.top - diagMove, "left": position.left + diagMove });
+                    break;
+                case "downLeft":
+                    ball.css({ "top": position.top + diagMove, "left": position.left - diagMove });
+                    break;
+                case "downRight":
+                    ball.css({ "top": position.top + diagMove, "left": position.left + diagMove });
+                    break;
+            }
+        }
+
+        $(document).ready(function() {
+            $("#aUp").click(function() { moveBall("up"); });
+            $("#aDown").click(function() { moveBall("down"); });
+            $("#aLeft").click(function() { moveBall("left"); });
+            $("#aRight").click(function() { moveBall("right"); });
+            $("#aUpLeft").click(function() { moveBall("upLeft"); });
+            $("#aUpperRight").click(function() { moveBall("upRight"); });
+            $("#aDownLeft").click(function() { moveBall("downLeft"); });
+            $("#aDownRight").click(function() { moveBall("downRight"); });
+        });
+    </script>   
+</head>
+
+<body>
+<h1>Fortress of Louisbourg</h1>
+
+<a href="javascript:showDiv();">(+)</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+<a href="javascript:hideDiv();">(-)</a> <br><br>
+
+<div id="myBlock">
+    <p>The Fortress of Louisbourg is the largest reconstruction project in North America. The original settlement 
+    was founded in 1713 by the French and developed over several decades into a thriving center for fishing and trade. Fortified 
+    against the threat of British invasion during the turbulent time of empire-building, Louisbourg was besieged twice before finally 
+    being destroyed in the 1760s. The site lay untouched until well into modern times, when archaeologists began to reconstruct the 
+    fortress as it was in the 18th century.</p>
+</div>
+
+<a href="javascript:changeTextColor();">make text red</a><br /><br />
+
+<p>Thanks to their efforts and the work of Parks Canada and the Fortress Louisbourg Association, you can now experience life in 
+Louisbourg during its heyday. There are more than a dozen buildings open to the public including three authentic working 18th 
+century restaurants. During the summer months hundreds of re-enactors or “animators” of all ages, from wealthy merchants to poor 
+soldiers, populate the streets of the restored fortress working, playing, and living life as they would have in 1744.</p>
+
+<p>So come experience living history at the Fortress Louisbourg. You can explore on your own, take a guided tour, or view daily 
+demonstrations of music, dancing, cooking, military drills, and much more. Take home a taste of the past with bread from the 
+King’s Bakery. You can even purchase 18th century replica gifts and Fortress memorabilia from our 1744 Boutiques.</p>
+
+<p>Visiting the Fortress of Louisbourg is sure to be the highlight of your vacation. Never before has the history of the French North American colonies been brought to life in such vivid detail. Plan to spend the whole day, because with dozens of things to see and do, time is sure to get away from you.</p>
+
+<p>From the museum exhibits in the Visitor’s Center to tours of the restored Fortress, there’s bound to be something to pique the interest of everyone regardless of their age. You can take a guided tour, experience the majesty of the Fortress by candlelight, or simply explore the town on your own and talk to its inhabitants about their lives.</p>
+
+<p>In addition to tours, we also offer a number of special visitor experiences. You can take part in a captivating entertainment experience with Louisbourg Live, sample a delightful palate of 18th century-inspired wines, have a delicious treat at the Widow Grandchamps’ Salon de Chocolat, or be entertained by 18th century dinner theatre.</p>
+
+<img src="cannonball.jpg" id="cannonball" />
+
+<div id="myArrows">
+    <div id="ularrow"><a id="aUpLeft"><img id="iUpLeft" src="ularrow.jpg" /></a></div>
+    <div id="uarrow"><a id="aUp"><img id="iUp" src="uarrow.jpg" /></a></div>
+    <div id="urarrow"><a id="aUpperRight"><img id="iUpperRight" src="urarrow.jpg" /></a></div>
+    <div id="larrow"><a id="aLeft"><img id="iLeft" src="larrow.jpg" /></a></div>
+    <div id="marrow"> &nbsp; </div>
+    <div id="rarrow"><a id="aRight"><img id="iRight" src="rarrow.jpg" /></a></div>
+    <div id="dlarrow"><a id="aDownLeft"><img id="iDownLeft" src="dlarrow.jpg" /></a></div>
+    <div id="darrow"><a id="aDown"><img id="iDown" src="darrow.jpg" /></a></div>
+    <div id="drarrow"><a id="aDownRight"><img id="iDownRight" src="drarrow.jpg" /></a></div>
+</div>
+
+</body>
+</html>

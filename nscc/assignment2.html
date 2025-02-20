@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        .errors {
+            color: red;
+            font-weight: 700;
+            display: none;
+        }
+        .errorDiv, .successDiv {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            font-weight: 700;
+        }
+        .errorDiv {
+            background-color: red;
+        }
+        .successDiv {
+            background-color: green;
+        }
+        #check-warning {
+            color: red;
+            font-weight: 700;
+        }
+        #submit {
+            display: none;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //i don't really get it yet but this validates the email
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function checkFormData() {
+            const title = $("#title").val();
+            const firstName = $("#firstName").val();
+            const lastName = $("#lastName").val();
+            const streetAddress = $("#streetAddress").val();
+            const address2 = $("#address2").val();
+            const address3 = $("#address3").val();
+            const province = $("#province").val();
+            const country = $("#country").val();
+            const email = $("#email").val();
+            const password1 = $("#password1").val();
+            const password2 = $("#password2").val();
+
+            let errors = 0;
+
+            if (title.trim().length === 0) {
+                errors = 1;
+                $("#titleError").css('display', 'inline-block');
+            } else {
+                $("#titleError").css('display', 'none');
+            }
+
+            if (firstName.trim().length === 0) {
+                errors = 2;
+                $("#firstNameError").css('display', 'inline-block');
+            } else {
+                $("#firstNameError").css('display', 'none');
+            }
+
+            if (lastName.trim().length === 0) {
+                errors = 3;
+                $("#lastNameError").css('display', 'inline-block');
+            } else {
+                $("#lastNameError").css('display', 'none');
+            }
+
+            if (streetAddress.trim().length === 0) {
+                errors = 4;
+                $("#streetAddressError").css('display', 'inline-block');
+            } else {
+                $("#streetAddressError").css('display', 'none');
+            }
+
+            if (province.trim().length === 0) {
+                errors = 5;
+                $("#provinceError").css('display', 'inline-block');
+            } else {
+                $("#provinceError").css('display', 'none');
+            }
+
+            if (country.trim().length === 0) {
+                errors = 6;
+                $("#countryError").css('display', 'inline-block');
+            } else {
+                $("#countryError").css('display', 'none');
+            }
+
+            if (!validateEmail(email)) {
+                errors = 7;
+                $("#emailError").css('display', 'inline-block');
+            } else {
+                $("#emailError").css('display', 'none');
+            }
+
+            if (password1.length < 6) {
+                errors = 8;
+                $("#password1Error").css('display', 'inline-block');
+            } else {
+                $("#password1Error").css('display', 'none');
+            }
+
+            if (password1 !== password2) {
+                errors = 9;
+                $("#password2Error").css('display', 'inline-block');
+            } else {
+                $("#password2Error").css('display', 'none');
+            }
+
+            if (errors === 0) {
+                $("body > div.errorDiv").remove();
+
+                const url = './send3.php';
+
+                const formData = new FormData();
+                formData.set('title', title);
+                formData.set('firstName', firstName);
+                formData.set('lastName', lastName);
+                formData.set('streetAddress', streetAddress);
+                formData.set('address2', address2);
+                formData.set('address3', address3);
+                formData.set('province', province);
+                formData.set('country', country);
+                formData.set('email', email);
+                formData.set('password1', password1);
+                formData.set('password2', password2);
+
+                let fetchParameters = {
+                    method: 'post',
+                    body: formData
+                };
+
+                fetch(url, fetchParameters)
+                    .then(response => response.json())
+                    .then(response => {
+                        console.log('decorde response is: ' + JSON.stringify(response));
+                        console.log(response);
+                        $("body").prepend("<div class='successDiv'>Registration successful!</div>");
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            } else {
+                $("body > div.errorDiv").remove();
+                $("body").prepend("<div class='errorDiv'>You have errors in your form.</div>");
+                console.log(`The last error code is: ${errors}`);
+            }
+        }
+
+        $(document).ready(function() {
+            $("#terms").click(function(e) {
+                if ($(this).is(':checked')) {
+                    $("#check-warning").css('display', 'none');
+                    $("#submit").css('display', 'block');
+                } else {
+                    $("#check-warning").css('display', 'block');
+                    $("#submit").css('display', 'none');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>Registration Form</div>
+    <form id="registrationForm" action="javascript:checkFormData();" method="post">
+        <label for="title">Title:</label>
+        <select name="title" id="title">
+            <option value="">Please choose...</option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Ms">Ms</option>
+            <option value="Dr">Dr</option>
+        </select>
+        <span class="errors" id="titleError">*required</span>
+        <br>
+
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" id="firstName" placeholder="Enter first name">
+        <span class="errors" id="firstNameError">*required</span>
+        <br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lastName" id="lastName" placeholder="Enter last name">
+        <span class="errors" id="lastNameError">*required</span>
+        <br>
+
+        <label for="streetAddress">Street Address:</label>
+        <input type="text" name="streetAddress" id="streetAddress" placeholder="Enter street address">
+        <span class="errors" id="streetAddressError">*required</span>
+        <br>
+
+        <label for="address2">Address 2 (Optional):</label>
+        <input type="text" name="address2" id="address2" placeholder="Enter address 2">
+        <br>
+
+        <label for="address3">Address 3 (Optional):</label>
+        <input type="text" name="address3" id="address3" placeholder="Enter address 3">
+        <br>
+
+        <label for="province">Province/State:</label>
+        <select name="province" id="province">
+            <option value="">Please choose...</option>
+            <option value="Ontario">Nova Scotia</option>
+            <option value="Quebec">Ontario</option>
+            <option value="California">New York</option>
+            <option value="New York">Virginia</option>
+        </select>
+        <span class="errors" id="provinceError">*required</span>
+        <br>
+
+        <label for="country">Country:</label>
+        <select name="country" id="country">
+            <option value="">Please choose...</option>
+            <option value="Canada">Canada</option>
+            <option value="USA">USA</option>
+        </select>
+        <span class="errors" id="countryError">*required</span>
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" placeholder="Enter email">
+        <span class="errors" id="emailError">*Invalid email</span>
+        <br>
+
+        <label for="password1">Password:</label>
+        <input type="password" name="password1" id="password1" placeholder="Enter password">
+        <span class="errors" id="password1Error">*Minimum of 6 characters.</span>
+        <br>
+
+        <label for="password2">Confirm Password:</label>
+        <input type="password" name="password2" id="password2" placeholder="Confirm password">
+        <span class="errors" id="password2Error">*Passwords do not match.</span>
+        <br>
+
+        <input type="checkbox" name="terms" id="terms" value="1"> 
+        You agree to the terms and conditions for the site (link)
+        <br>
+        <span id="check-warning">*Terms must be agreed to. Check checkbox</span>
+        <br>
+
+        <input type="submit" id="submit" value="Submit">
+    </form>
+</body>
+</html>
